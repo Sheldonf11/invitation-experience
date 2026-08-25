@@ -31,6 +31,18 @@
   vr-mode-ui="enabled: false"
   device-orientation-permission-ui="enabled: false">
 
+  <a-assets>
+    <video
+      id="testVideo"
+      src="./test.mp4"
+      preload="auto"
+      loop
+      playsinline
+      webkit-playsinline
+      crossorigin="anonymous">
+    </video>
+  </a-assets>
+
   <a-camera
     position="0 0 0"
     look-controls="enabled: false">
@@ -38,16 +50,36 @@
 
   <a-entity mindar-image-target="targetIndex: 0">
 
-    <a-plane
-      color="red"
-      width="1"
-      height="1"
-      position="0 0 0">
-    </a-plane>
+    <a-video
+      src="#testVideo"
+      width="0.9"
+      height="0.50625"
+      position="0 0 0.01"
+      autoplay="false"
+      loop="true">
+    </a-video>
 
   </a-entity>
 
 </a-scene>
+
+<script>
+  const target = document.querySelector(
+    '[mindar-image-target="targetIndex: 0"]'
+  );
+
+  const video = document.getElementById('testVideo');
+
+  target.addEventListener('targetFound', () => {
+    video.play().catch(error => {
+      console.log('Video playback waiting for interaction:', error);
+    });
+  });
+
+  target.addEventListener('targetLost', () => {
+    video.pause();
+  });
+</script>
 
 </body>
 </html>
