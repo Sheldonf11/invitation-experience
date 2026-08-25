@@ -71,11 +71,8 @@
 
   const video = document.getElementById('testVideo');
 
-  target.addEventListener('targetFound', () => {
-    video.muted = true;
-    video.play().catch(err => {
-      console.log('Playback blocked:', err);
-    });
+  target.addEventListener("targetFound", () => {
+    window.location.href = "./video.html";
   });
 
   target.addEventListener('targetLost', () => {
