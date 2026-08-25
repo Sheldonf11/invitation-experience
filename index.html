@@ -36,10 +36,11 @@
       id="testVideo"
       src="./test.mp4"
       preload="auto"
+      autoplay
+      muted
       loop
       playsinline
-      webkit-playsinline
-      crossorigin="anonymous">
+      webkit-playsinline>
     </video>
   </a-assets>
 
@@ -51,13 +52,13 @@
   <a-entity mindar-image-target="targetIndex: 0">
 
     <a-video
+      id="arVideo"
       src="#testVideo"
       width="0.9"
       height="0.50625"
       position="0 0 0.01"
-      autoplay="false"
-      loop="true">
-    </a-video>
+      material="shader: flat"
+    ></a-video>
 
   </a-entity>
 
@@ -71,8 +72,9 @@
   const video = document.getElementById('testVideo');
 
   target.addEventListener('targetFound', () => {
-    video.play().catch(error => {
-      console.log('Video playback waiting for interaction:', error);
+    video.muted = true;
+    video.play().catch(err => {
+      console.log('Playback blocked:', err);
     });
   });
 
